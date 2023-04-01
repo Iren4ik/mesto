@@ -1,0 +1,37 @@
+.header {
+  margin: 45px auto 0;
+  width: 69%;  
+  max-width: 880px;
+  position: relative;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -41px;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(84, 84, 84, 0.7);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    margin: 36px auto 0;
+    width: 76%;
+  }
+  .header::after {
+    bottom: -37px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    margin: 28px auto 0;
+    width: 100%;
+  }
+  .header::after {
+    bottom: -32px;
+  }
+}
