@@ -1,0 +1,8 @@
+.profile {
+  margin: 77px auto 47px;
+  width: 69%;  
+  max-width: 880px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

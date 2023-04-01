@@ -1,0 +1,11 @@
+.profile__intro-edit-btn {
+  all: unset;
+  background-image: url(../../../images/edit-btn.svg);
+  height: 24px;
+  width: 24px;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: self-end;
+  padding-bottom: 18px;
+}
