@@ -1,0 +1,21 @@
+.elements {
+  max-width: 880px;
+  margin: auto;
+  color: #000;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.5em;
+  line-height: 1.21;
+}
+
+@media screen and (max-width: 768px) {
+  .elements {
+    width: 76%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .elements {
+    width: 88%;
+  }
+}

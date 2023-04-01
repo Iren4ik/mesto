@@ -1,0 +1,12 @@
+.elements__like {
+  all: unset;
+  background-image: url(../../../images/heart.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 22px;
+  height: 19px;
+}
+
+.elements__like:active {
+  background-image: url(../../../images/heart_active.png);
+}

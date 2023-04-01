@@ -4,4 +4,21 @@
   font-weight: 400;
   font-size: 1.12em;
   line-height: 1.22;
+  max-width: 400px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__intro-status {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile__intro-status {
+    font-size: 0.87em;
+    line-height: 1.2;
+  }
 }

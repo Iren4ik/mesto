@@ -3,3 +3,9 @@
   flex-direction: row;
   padding-bottom: 8px;
 }
+
+@media screen and (max-width: 768px) {
+  .profile__intro-name-container {
+    margin-left: 28px;
+  }
+}
