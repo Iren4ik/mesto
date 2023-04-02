@@ -1,0 +1,12 @@
+.edit-form {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  justify-content: center;
+  align-self: center;
+  min-width: 320px;
+}
