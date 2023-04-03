@@ -1,4 +1,4 @@
-.edit-form__close-btn {
+.popup__close-btn {
   all: unset;
   background-image: url(../../../images/Close-btn.svg);
   width: 32px;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 560px) {
-  .edit-form__close-btn {
+  .popup__close-btn {
     width: 20px;
     height: 20px;
     top: -36px;

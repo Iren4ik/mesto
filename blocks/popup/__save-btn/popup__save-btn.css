@@ -1,4 +1,4 @@
-.edit-form__save-btn {
+.popup__save-btn {
   all: unset;
   width: 100%;
   margin: 46px auto auto;
@@ -13,13 +13,13 @@
   transition: opacity .2s ease-in-out;
 }
 
-.edit-form__save-btn:hover {
+.popup__save-btn:hover {
   opacity: .8;
   cursor: pointer;
 }
 
 @media screen and (max-width: 470px) {
-  .edit-form__save-btn {
+  .popup__save-btn {
     height: 46px;
     font-size: 0.87em;
     line-height: 1.21;

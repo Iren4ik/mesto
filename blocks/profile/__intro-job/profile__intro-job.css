@@ -1,4 +1,4 @@
-.profile__intro-status {
+.profile__intro-job {
   margin: 0;
   font-style: normal;
   font-weight: 400;
@@ -11,13 +11,13 @@
 }
 
 @media screen and (max-width: 820px) {
-  .profile__intro-status {
+  .profile__intro-job {
     text-align: center;
   }
 }
 
 @media screen and (max-width: 425px) {
-  .profile__intro-status {
+  .profile__intro-job {
     font-size: 0.87em;
     line-height: 1.2;
   }
