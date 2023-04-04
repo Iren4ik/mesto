@@ -1,29 +1,35 @@
-//Открытие и закрытие формы
 let editProfileBtn = document.querySelector('.profile__intro-edit-btn');
 let closePopupBtn = document.querySelector('.popup__close-btn');
 let editForm = document.querySelector('.popup');
+let formElement = document.querySelector('.popup__input-container');
+let nameProfile = document.querySelector('.profile__intro-name');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobProfile = document.querySelector('.profile__intro-job');
+let jobInput = document.querySelector('.popup__input_type_job');
 
-function openAndCloseEditForm() {
-  editForm.classList.toggle('popup_opened');
+//Открытие формы
+
+function openEditForm() {
+  editForm.classList.add('popup_opened');
+  nameInput.value =  nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
 }
 
-editProfileBtn.addEventListener('click', openAndCloseEditForm);
-closePopupBtn.addEventListener('click', openAndCloseEditForm);
+//Закрытие формы
 
-//Сохранение новых данных
-
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
-let nameProfile = document.querySelector('.profile__intro-name');
-let jobProfile = document.querySelector('.profile__intro-job');
-let saveProfileBtn = document.querySelector('.popup__save-btn');
-
-function handleFormSubmit(evt) {
-  evt.preventDefault(); 
-
-  nameProfile.textContent = nameInput.value;
-  jobProfile.textContent = jobInput.value;
+function closeEditForm() {
   editForm.classList.remove('popup_opened');
 }
 
-editForm.addEventListener('submit', handleFormSubmit); 
+//Сохранение новых данных
+
+function handleFormSubmit(evt) {
+  evt.preventDefault(); 
+  nameProfile.textContent = nameInput.value;
+  jobProfile.textContent = jobInput.value;
+  closeEditForm();
+}
+
+editProfileBtn.addEventListener('click', openEditForm);
+closePopupBtn.addEventListener('click', closeEditForm);
+formElement.addEventListener('submit', handleFormSubmit); 

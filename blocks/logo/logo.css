@@ -7,6 +7,7 @@
   .logo {
     max-width: 123px;
     max-height: auto;
+    margin-left: 8.4%;
   }
 }
 
@@ -14,6 +15,5 @@
   .logo {
     max-width: 103px;
     max-height: auto;
-    margin-left: 8.4%;
   }
 }

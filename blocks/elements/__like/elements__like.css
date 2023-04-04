@@ -5,6 +5,12 @@
   background-repeat: no-repeat;
   width: 22px;
   height: 19px;
+  transition: opacity .2s ease-in-out;
+}
+
+.elements__like:hover {
+  opacity: .5;
+  cursor: pointer;
 }
 
 .elements__like:active {

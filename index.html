@@ -18,60 +18,56 @@
         <div class="profile__intro">
           <div class="profile__intro-name-container">
             <h1 class="profile__intro-name">Жак-Ив Кусто</h1>
-            <button class="profile__intro-edit-btn opacity" type="button">
-              <img class="profile__edit-btn-pen" src="./images/pen.svg" alt="Редактировать">
-            </button>
+            <button class="profile__intro-edit-btn opacity" type="button" aria-label="Редактировать"></button>
           </div>
           <p class="profile__intro-job">Исследователь океана</p>
         </div> 
       </div>
-      <button class="profile__add-btn opacity" type="button">
-        <img class="profile__add-btn-plus" src="./images/plus.svg" alt="Добавить">
-      </button>
+      <button class="profile__add-btn opacity" type="button" aria-label="Добавить"></button>
     </section>
 
     <section class="elements">
       <ul class="elements__items">
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/Sudak.jpg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/sudak.jpg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Судак</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Судак</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/Kizhi.jpg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/kizhi.jpg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Кижи</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Кижи</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/kamchatka.jpg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/kamchatka.jpg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Камчатка</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Камчатка</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/Sakhalin.jpg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/sakhalin.jpg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Сахалин</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Сахалин</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/kosa.jpg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/kosa.jpg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Куршская коса</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Куршская коса</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
         <li class="elements__element">
-          <img class="elements__photo" src="./images/Photo/dagestan.jpeg" alt="Фото">
+          <img class="elements__photo" src="./images/photo/dagestan.jpeg" alt="Фото">
           <div class="elements__caption">
-            <p class="elements__place">Дагестан</p>
-            <button class="elements__like opacity" type="button"></button>
+            <h2 class="elements__place">Дагестан</h2>
+            <button class="elements__like" type="button"></button>
           </div>
         </li>
       </ul>
@@ -86,8 +82,8 @@
     <div class="popup__container">
       <button class="popup__close-btn opacity" type="button"></button>
       <h2 class="popup__header">Редактировать профиль</h2>
-      <form class="popup__input-container">
-        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя">
+      <form class="popup__input-container" name="edit-form">
+        <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required>
         <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="О себе">
         <input class="popup__save-btn" type="submit" value="Сохранить">
       </form>
