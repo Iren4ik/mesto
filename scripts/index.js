@@ -4,7 +4,7 @@ import { initialCards } from "./constants.js";
 const editProfileBtn = document.querySelector('.profile__intro-edit-btn');
 const closePopupEditBtn = document.querySelector('.popup__close-btn_edit');
 const popupEditForm = document.querySelector('.popup_edit-form');
-const formElement = document.querySelector('.popup__input-container');
+const formElement = document.querySelector('.popup__input-container_type_edit');
 const nameProfile = document.querySelector('.profile__intro-name');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobProfile = document.querySelector('.profile__intro-job');
@@ -15,8 +15,11 @@ const cardsContainer = document.querySelector('.elements__items');
 const addCardsBtn = document.querySelector('.profile__add-btn');
 const popupAddForm = document.querySelector('.popup_add-cards');
 const closePopupAddBtn = document.querySelector('.popup__close-btn_add');
-// const captionInput = document.querySelector('.popup__input_type_caption');
-// const linkInput = document.querySelector('.popup__input_type_link');
+const captionInput = document.querySelector('.popup__input_type_caption');
+const linkInput = document.querySelector('.popup__input_type_link');
+const addElement = document.querySelector('.popup__input-container_type_add');
+
+
 
 //Форма редактирования
 function openEditForm() {
@@ -24,11 +27,9 @@ function openEditForm() {
   nameInput.value =  nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
-
 function closeEditForm() {
   popupEditForm.classList.remove('popup_opened');
 }
-
 function handleFormSubmit(evt) {
   evt.preventDefault(); 
   nameProfile.textContent = nameInput.value;
@@ -37,6 +38,9 @@ function handleFormSubmit(evt) {
 } 
 
 //Добавление карточек
+
+
+
 //Создаем элемент
 const createCardElement = (cardData) => {
   //ищем и клонируем контент шаблона
@@ -79,6 +83,17 @@ function closeAddForm() {
   popupAddForm.classList.remove('popup_opened');
 }
 
+function handleAddCard(evt) {
+  evt.preventDefault(); 
+  let elementAdd = {
+    name: captionInput.value,
+    link: linkInput.value
+  };
+  const element = createCardElement(elementAdd);
+  cardsContainer.prepend(element);
+
+  closeAddForm();
+}
 
 //Слушатели формы редактирования
 editProfileBtn.addEventListener('click', openEditForm);
@@ -87,3 +102,4 @@ formElement.addEventListener('submit', handleFormSubmit);
 //Слушатели добавления карточек
 addCardsBtn.addEventListener('click', openAddForm);
 closePopupAddBtn.addEventListener('click', closeAddForm);
+addElement.addEventListener('submit', handleAddCard);
