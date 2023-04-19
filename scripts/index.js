@@ -40,7 +40,31 @@ function handleFormSubmit(evt) {
   closeEditForm();
 } 
 
-//Карточки
+function openAddForm() {
+  captionInput.value = '';
+  linkInput.value = '';
+  popupAddForm.classList.add('popup_opened');
+}
+
+function closeAddForm() {
+  popupAddForm.classList.remove('popup_opened');
+}
+
+function handleAddCard(evt) {
+  evt.preventDefault(); 
+  let elementAdd = {
+    name: captionInput.value,
+    link: linkInput.value
+  };
+  const element = createCardElement(elementAdd);
+  cardsContainer.prepend(element);
+  closeAddForm();
+}
+
+function closePhoto() {
+  popupPhoto.classList.remove('popup-photo_opened');
+}
+
 const createCardElement = (cardData) => {
   const cardElement = cardsTemplate.content.querySelector('.elements__element').cloneNode(true);   //ищем и клонируем контент шаблона
   const cardImage = cardElement.querySelector('.elements__photo');
@@ -80,30 +104,7 @@ initialCards.forEach((card) => {   //Смотрим каждый элемнт м
   cardsContainer.prepend(element);
 });
 
-function openAddForm() {
-  captionInput.value = '';
-  linkInput.value = '';
-  popupAddForm.classList.add('popup_opened');
-}
 
-function closeAddForm() {
-  popupAddForm.classList.remove('popup_opened');
-}
-
-function handleAddCard(evt) {
-  evt.preventDefault(); 
-  let elementAdd = {
-    name: captionInput.value,
-    link: linkInput.value
-  };
-  const element = createCardElement(elementAdd);
-  cardsContainer.prepend(element);
-  closeAddForm();
-}
-
-function closePhoto() {
-  popupPhoto.classList.remove('popup-photo_opened');
-}
 
 //Слушатели формы редактирования
 editProfileBtn.addEventListener('click', openEditForm);
