@@ -28,9 +28,11 @@ function openEditForm() {
   nameInput.value =  nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
+
 function closeEditForm() {
   popupEditForm.classList.remove('popup_opened');
 }
+
 function handleFormSubmit(evt) {
   evt.preventDefault(); 
   nameProfile.textContent = nameInput.value;
@@ -39,10 +41,8 @@ function handleFormSubmit(evt) {
 } 
 
 //Карточки
-
 const createCardElement = (cardData) => {
   const cardElement = cardsTemplate.content.querySelector('.elements__element').cloneNode(true);   //ищем и клонируем контент шаблона
-
   const cardImage = cardElement.querySelector('.elements__photo');
   const cardTitle = cardElement.querySelector('.elements__place');
   const cardDeleteBtn = cardElement.querySelector('.elements__trash');
@@ -98,7 +98,6 @@ function handleAddCard(evt) {
   };
   const element = createCardElement(elementAdd);
   cardsContainer.prepend(element);
-
   closeAddForm();
 }
 
