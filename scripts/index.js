@@ -2,8 +2,8 @@ import { initialCards } from "./constants.js";
 
 //Переменные для формы редактирования
 const editProfileBtn = document.querySelector('.profile__intro-edit-btn');
-const closePopupEditBtn = document.querySelector('.popup__close-btn_edit');
-const popupEditForm = document.querySelector('.popup_edit-form');
+const closePopupEditBtn = document.querySelector('.popup__close-btn_type_edit');
+const popupEditForm = document.querySelector('.popup_type_edit-form');
 const formElement = document.querySelector('.popup__input-container_type_edit');
 const nameProfile = document.querySelector('.profile__intro-name');
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -13,8 +13,8 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 const addCardsBtn = document.querySelector('.profile__add-btn');
-const popupAddForm = document.querySelector('.popup_add-cards');
-const closePopupAddBtn = document.querySelector('.popup__close-btn_add');
+const popupAddForm = document.querySelector('.popup_type_add-cards');
+const closePopupAddBtn = document.querySelector('.popup__close-btn_type_add');
 const captionInput = document.querySelector('.popup__input_type_caption');
 const linkInput = document.querySelector('.popup__input_type_link');
 const addElement = document.querySelector('.popup__input-container_type_add');
