@@ -3,7 +3,7 @@ import { initialCards } from "./constants.js";
 //Переменные для формы редактирования
 const editProfileBtn = document.querySelector('.profile__intro-edit-btn');
 const closePopupEditBtn = document.querySelector('.popup__close-btn_type_edit');
-const popupEditForm = document.querySelector('.popup_type_edit-form');
+const popupEditForm = document.querySelector('.popup_feat_edit-form');
 const formElement = document.querySelector('.popup__input-container_type_edit');
 const nameProfile = document.querySelector('.profile__intro-name');
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -13,14 +13,14 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 const addCardsBtn = document.querySelector('.profile__add-btn');
-const popupAddForm = document.querySelector('.popup_type_add-cards');
+const popupAddForm = document.querySelector('.popup_feat_add-cards');
 const closePopupAddBtn = document.querySelector('.popup__close-btn_type_add');
 const captionInput = document.querySelector('.popup__input_type_caption');
 const linkInput = document.querySelector('.popup__input_type_link');
 const addElement = document.querySelector('.popup__input-container_type_add');
 //Переменные для открытия карточек
-const popupPhoto = document.querySelector('.popup-photo');
-const closePopupPhoto = document.querySelector('.popup-photo__close-btn');
+const popupPhoto = document.querySelector('.popup_type_show-image');
+const closePopupPhoto = document.querySelector('.popup__close-btn_type_close-photo');
 
 //Форма редактирования
 function openEditForm() {
@@ -84,12 +84,12 @@ const createCardElement = (cardData) => {
   };
 
   const openPhoto = () => {
-    const photoSrc = document.querySelector('.popup-photo__photo');
-    const photoTitle = document.querySelector('.popup-photo__caption');
+    const photoSrc = document.querySelector('.popup__photo');
+    const photoTitle = document.querySelector('.popup__caption');
   
     photoSrc.src = cardData.link;
     photoTitle.textContent = cardData.name;
-    popupPhoto.classList.add('popup-photo_opened');
+    popupPhoto.classList.add('popup_opened');
   }
   
   cardImage.addEventListener('click', openPhoto);
@@ -104,7 +104,31 @@ initialCards.forEach((card) => {   //Смотрим каждый элемнт м
   cardsContainer.prepend(element);
 });
 
+function openAddForm() {
+  captionInput.value = '';
+  linkInput.value = '';
+  popupAddForm.classList.add('popup_opened');
+}
 
+function closeAddForm() {
+  popupAddForm.classList.remove('popup_opened');
+}
+
+function handleAddCard(evt) {
+  evt.preventDefault(); 
+  let elementAdd = {
+    name: captionInput.value,
+    link: linkInput.value
+  };
+  const element = createCardElement(elementAdd);
+  cardsContainer.prepend(element);
+
+  closeAddForm();
+}
+
+function closePhoto() {
+  popupPhoto.classList.remove('popup_opened');
+}
 
 //Слушатели формы редактирования
 editProfileBtn.addEventListener('click', openEditForm);
