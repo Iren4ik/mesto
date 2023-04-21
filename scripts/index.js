@@ -24,7 +24,6 @@ const closeShowPictureBtn = showPicturePopup.querySelector('.popup__close-btn');
 const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 
-
 const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
 }
@@ -63,14 +62,12 @@ const handleAddFormSubmit = (evt) => {
   closePopup(addFormPopup);
 }
 
-
 const createCardElement = (cardData) => {
   const cardElement = cardsTemplate.content.querySelector('.elements__element').cloneNode(true);   //ищем и клонируем контент шаблона
   const cardImage = cardElement.querySelector('.elements__photo');
   const cardTitle = cardElement.querySelector('.elements__place');
   const cardDeleteBtn = cardElement.querySelector('.elements__trash');
   const cardLikeBtn = cardElement.querySelector('.elements__like');
-
   cardTitle.textContent = cardData.name;   //присваиваем контенту значения массива с сервера
   cardImage.src = cardData.link;
 
@@ -93,7 +90,6 @@ const createCardElement = (cardData) => {
   cardImage.addEventListener('click', openPhoto);
   cardDeleteBtn.addEventListener('click', handleDelete);
   cardLikeBtn.addEventListener('click', handleLike);
-
   return cardElement;
 };
 
@@ -102,16 +98,10 @@ initialCards.forEach((card) => {   //Смотрим каждый элемнт м
   cardsContainer.append(element);
 });
 
-
-
 openEditProfileBtn.addEventListener('click', openEditForm);
 openAddCardsBtn.addEventListener('click', openAddForm);
-
 closeEditProfileBtn.addEventListener('click', () => closePopup(editProfilePopup));
 closeAddFormBtn.addEventListener('click', () => closePopup(addFormPopup)); 
 closeShowPictureBtn.addEventListener('click', () => closePopup(showPicturePopup));
-
 editProfileForm.addEventListener('submit', handleProfileFormSubmit); 
 addCardsForm.addEventListener('submit', handleAddFormSubmit);
-
-
