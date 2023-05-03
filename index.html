@@ -43,7 +43,7 @@
       <h2 class="popup__header">Редактировать профиль</h2>
       <!--ФОРМА РЕДАКТИРОВАНИЯ-->
       <form class="popup__input-container popup__input-container_type_edit" 
-            name="edit-form"> <!--novalidate-->
+            name="edit-form" novalidate> <!---->
         <label class="popup__input-element">
           <input class="popup__input popup__input_type_name" 
                 id="name" 
@@ -72,7 +72,7 @@
       <h2 class="popup__header">Новое место</h2>
       <!--ФОРМА ДОБАВЛЕНИЯ-->
       <form class="popup__input-container popup__input-container_type_add" 
-            name="add-form"> <!--novalidate-->
+            name="add-form" novalidate> <!--novalidate-->
         <label class="popup__input-element">
           <input class="popup__input popup__input_type_caption" 
                 id="caption" 
@@ -117,5 +117,6 @@
 
   <script src="./scripts/constants.js" type="module"></script>
   <script src="./scripts/index.js" type="module"></script>
+  <script src="./scripts/validate.js" type="module"></script>
 </body>
 </html>
