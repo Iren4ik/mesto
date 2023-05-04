@@ -24,6 +24,18 @@ const closeShowPictureBtn = showPicturePopup.querySelector('.popup__close-btn');
 const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 
+const closeClickToOverlay = (evt) => {
+  const isOverlay = evt.target.classList.contains('popup'); 
+  const isCloseBtn = evt.target.classList.contains('popup__close-btn');
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+
+  if (isOverlay || isCloseBtn) {
+    popupList.forEach((popupElement) => {
+      closePopup(popupElement);
+    });
+  }
+}; 
+
 const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
 }
@@ -68,7 +80,7 @@ const createCardElement = (cardData) => {
   const cardTitle = cardElement.querySelector('.elements__place');
   const cardDeleteBtn = cardElement.querySelector('.elements__trash');
   const cardLikeBtn = cardElement.querySelector('.elements__like');
-  cardTitle.textContent = cardData.name;   //присваиваем контенту значения массива с сервера
+  cardTitle.textContent = cardData.name;
   cardImage.src = cardData.link;
 
   const handleDelete = () => {
@@ -105,3 +117,5 @@ closeAddFormBtn.addEventListener('click', () => closePopup(addFormPopup));
 closeShowPictureBtn.addEventListener('click', () => closePopup(showPicturePopup));
 editProfileForm.addEventListener('submit', handleProfileFormSubmit); 
 addCardsForm.addEventListener('submit', handleAddFormSubmit);
+document.addEventListener('click', (evt) => closeClickToOverlay(evt));
+
