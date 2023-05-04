@@ -1,56 +1,55 @@
 //делает поле красным и показывает снизу ошибку
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_valid_error');
+  inputElement.classList.add(obj.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__error_visible');
+  errorElement.classList.add(obj.errorClass);
 };
 
 //убирает ошибки
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_valid_error');
-  errorElement.classList.remove('popup__error_visible');
+  inputElement.classList.remove(obj.inputErrorClass);
+  errorElement.classList.remove(obj.errorClass);
   errorElement.textContent = '';
 };
 
 //проверяет инпут на валидность при наборе символов и выводит предупрждающие сообщения
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, obj) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, obj);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, obj);
   }
 };
 
 //навешивает слушатель на все инпуты с проверкой полей и активацией кнопки ГДЕ ТО ТУТ НЕ ТАК
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-btn');
+const setEventListeners = (formElement, obj) => { 
+  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
   
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, obj);
   
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, obj);
       // чтобы проверять его при изменении любого из полей
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, obj);
     });
   });
 };
 
 //навешивает слушатель на все формы в документе и снимает стандартные действия
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__input-container'));
+const enableValidation = (obj) => {
+  const formList = Array.from(document.querySelectorAll(obj.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, obj);
   });
 };
 
-//проверяет весь инпут на наличие невалидных полей
 //ф-я обходит массив полей и отвечает на вопрос: «Есть ли здесь хотя бы одно поле, которое не прошло валидацию?»
 const hasInvalidInput = (inputList) => { 
   return inputList.some((inputElement) => { //false - все поля валидны
@@ -59,14 +58,21 @@ const hasInvalidInput = (inputList) => {
 };
 
 //блокирует кнопку, если хотя бы одно поле невалидно
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) { //проверяем есть ли невалидные поля
-    buttonElement.classList.add('popup__save-btn_disabled');
+    buttonElement.classList.add(obj.inactiveButtonClass);
     buttonElement.setAttribute('disabled', true);
   } else {
-    buttonElement.classList.remove('popup__save-btn_disabled');
+    buttonElement.classList.remove(obj.inactiveButtonClass);
     buttonElement.removeAttribute('disabled', true);
   }
 }
 
-enableValidation();
+enableValidation({
+  formSelector: '.popup__input-container', //obj.formSelector
+  inputSelector: '.popup__input', //obj.inputSelector
+  submitButtonSelector: '.popup__save-btn', // obj.submitButtonSelector
+  inactiveButtonClass: 'popup__save-btn_disabled', //obj.inactiveButtonClass
+  inputErrorClass: 'popup__input_valid_error', // obj.inputErrorClass
+  errorClass: 'popup__error_visible' //obj.errorClass
+});
