@@ -1,4 +1,5 @@
 import { initialCards } from "./constants.js";
+import { activeButton }  from "./validate.js";
 import { inactiveButton }  from "./validate.js";
 
 // элементы секции profile:
@@ -60,6 +61,7 @@ const closePopup = (popupElement) => {
 const openEditForm = () => {
   editProfileNameInput.value =  profileName.textContent;
   editProfileJobInput.value = profileJob.textContent;
+  activeButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(editProfilePopup);
 }
 

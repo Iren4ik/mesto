@@ -85,4 +85,5 @@ enableValidation({
   errorClass: 'popup__error_visible' //obj.errorClass
 });
 
+export { activeButton };
 export { inactiveButton };
