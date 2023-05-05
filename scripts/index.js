@@ -37,18 +37,29 @@ const closeClickToOverlay = (evt) => {
   }
 }; 
 
+const closePressTheEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    popupList.forEach((popupElement) => {
+      closePopup(popupElement);
+    });
+  }
+}
+
 const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('click', (evt) => closeClickToOverlay(evt));
+  document.addEventListener('keydown', (evt) => closePressTheEsc(evt));
 }
 
 const closePopup = (popupElement) => {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('click', (evt) => closeClickToOverlay(evt));
+  document.removeEventListener('keydown', (evt) => closePressTheEsc(evt));
 }
 
 const openEditForm = () => {
   editProfileNameInput.value =  profileName.textContent;
   editProfileJobInput.value = profileJob.textContent;
-  inactiveButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(editProfilePopup);
 }
 
@@ -120,5 +131,4 @@ closeAddFormBtn.addEventListener('click', () => closePopup(addFormPopup));
 closeShowPictureBtn.addEventListener('click', () => closePopup(showPicturePopup));
 editProfileForm.addEventListener('submit', handleProfileFormSubmit); 
 addCardsForm.addEventListener('submit', handleAddFormSubmit);
-document.addEventListener('click', (evt) => closeClickToOverlay(evt));
 
