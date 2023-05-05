@@ -1,11 +1,13 @@
 import { initialCards } from "./constants.js";
-import { activeButton }  from "./validate.js";
-import { inactiveButton }  from "./validate.js";
+import { activateButton }  from "./validate.js";
+import { deactivateButton }  from "./validate.js";
 
 // элементы секции profile:
 const profileName = document.querySelector('.profile__intro-name');
 const profileJob = document.querySelector('.profile__intro-job');
 const openEditProfileBtn = document.querySelector('.profile__intro-edit-btn');
+const photoSrc = document.querySelector('.popup__photo'); //
+const photoTitle = document.querySelector('.popup__caption');//
 // элементы editProfilePopup:
 const editProfilePopup = document.querySelector('.popup_feat_edit-form');
 const editProfileForm = document.querySelector('.popup__input-container_type_edit');
@@ -27,7 +29,8 @@ const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
-const closeClickToOverlay = (evt) => {
+
+const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
   const isCloseBtn = evt.target.classList.contains('popup__close-btn');
 
@@ -48,27 +51,27 @@ const closePressTheEsc = (evt) => {
 
 const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
-  document.addEventListener('click', (evt) => closeClickToOverlay(evt));
-  document.addEventListener('keydown', (evt) => closePressTheEsc(evt));
+  document.addEventListener('click', handlePopupClose);
+  document.addEventListener('keydown', closePressTheEsc);
 }
 
 const closePopup = (popupElement) => {
   popupElement.classList.remove('popup_opened');
-  document.removeEventListener('click', (evt) => closeClickToOverlay(evt));
-  document.removeEventListener('keydown', (evt) => closePressTheEsc(evt));
+  document.removeEventListener('click', handlePopupClose);
+  document.removeEventListener('keydown', closePressTheEsc);
 }
 
 const openEditForm = () => {
   editProfileNameInput.value =  profileName.textContent;
   editProfileJobInput.value = profileJob.textContent;
-  activeButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  activateButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(editProfilePopup);
 }
 
 const openAddForm = () => {
   addFormCaptionInput.value = '';
   addFormLinkInput.value = '';
-  inactiveButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  deactivateButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(addFormPopup);
 }
 
@@ -108,8 +111,6 @@ const createCardElement = (cardData) => {
   };
 
   const openPhoto = () => {
-    const photoSrc = document.querySelector('.popup__photo');
-    const photoTitle = document.querySelector('.popup__caption');
     photoSrc.src = cardData.link;
     photoTitle.textContent = cardData.name;
     openPopup(showPicturePopup);
@@ -128,9 +129,6 @@ initialCards.forEach((card) => {   //Смотрим каждый элемнт м
 
 openEditProfileBtn.addEventListener('click', openEditForm);
 openAddCardsBtn.addEventListener('click', openAddForm);
-closeEditProfileBtn.addEventListener('click', () => closePopup(editProfilePopup));
-closeAddFormBtn.addEventListener('click', () => closePopup(addFormPopup)); 
-closeShowPictureBtn.addEventListener('click', () => closePopup(showPicturePopup));
 editProfileForm.addEventListener('submit', handleProfileFormSubmit); 
 addCardsForm.addEventListener('submit', handleAddFormSubmit);
 

@@ -30,12 +30,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const inactiveButton = (buttonElement, obj) => {
+const deactivateButton = (buttonElement, obj) => {
   buttonElement.classList.add(obj.inactiveButtonClass);
   buttonElement.setAttribute('disabled', true);
 }
 
-const activeButton = (buttonElement, obj) => {
+const activateButton = (buttonElement, obj) => {
   buttonElement.classList.remove(obj.inactiveButtonClass);
   buttonElement.removeAttribute('disabled', true);
 }
@@ -43,9 +43,9 @@ const activeButton = (buttonElement, obj) => {
 //блокирует кнопку, если хотя бы одно поле невалидно
 const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) { //проверяем есть ли невалидные поля
-    inactiveButton(buttonElement, obj);
+    deactivateButton(buttonElement, obj);
   } else {
-    activeButton(buttonElement, obj);
+    activateButton(buttonElement, obj);
   }
 }
 
@@ -85,5 +85,5 @@ enableValidation({
   errorClass: 'popup__error_visible' //obj.errorClass
 });
 
-export { activeButton };
-export { inactiveButton };
+export { activateButton };
+export { deactivateButton };
