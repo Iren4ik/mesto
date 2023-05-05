@@ -23,7 +23,33 @@ const checkInputValidity = (formElement, inputElement, obj) => {
   }
 };
 
-//навешивает слушатель на все инпуты с проверкой полей и активацией кнопки ГДЕ ТО ТУТ НЕ ТАК
+//ф-я обходит массив полей и отвечает на вопрос: «Есть ли здесь хотя бы одно поле, которое не прошло валидацию?»
+const hasInvalidInput = (inputList) => { 
+  return inputList.some((inputElement) => { //false - все поля валидны
+    return !inputElement.validity.valid; //не true - нет невалидных полей
+  });
+};
+
+const inactiveButton = (buttonElement, obj) => {
+  buttonElement.classList.add(obj.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
+const activeButton = (buttonElement, obj) => {
+  buttonElement.classList.remove(obj.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled', true);
+}
+
+//блокирует кнопку, если хотя бы одно поле невалидно
+const toggleButtonState = (inputList, buttonElement, obj) => {
+  if (hasInvalidInput(inputList)) { //проверяем есть ли невалидные поля
+    inactiveButton(buttonElement, obj);
+  } else {
+    activeButton(buttonElement, obj);
+  }
+}
+
+//навешивает слушатель на все инпуты с проверкой полей и активацией кнопки
 const setEventListeners = (formElement, obj) => { 
   const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
   const buttonElement = formElement.querySelector(obj.submitButtonSelector);
@@ -50,24 +76,6 @@ const enableValidation = (obj) => {
   });
 };
 
-//ф-я обходит массив полей и отвечает на вопрос: «Есть ли здесь хотя бы одно поле, которое не прошло валидацию?»
-const hasInvalidInput = (inputList) => { 
-  return inputList.some((inputElement) => { //false - все поля валидны
-    return !inputElement.validity.valid; //не true - нет невалидных полей
-  });
-};
-
-//блокирует кнопку, если хотя бы одно поле невалидно
-const toggleButtonState = (inputList, buttonElement, obj) => {
-  if (hasInvalidInput(inputList)) { //проверяем есть ли невалидные поля
-    buttonElement.classList.add(obj.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
-  } else {
-    buttonElement.classList.remove(obj.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled', true);
-  }
-}
-
 enableValidation({
   formSelector: '.popup__input-container', //obj.formSelector
   inputSelector: '.popup__input', //obj.inputSelector
@@ -76,3 +84,5 @@ enableValidation({
   inputErrorClass: 'popup__input_valid_error', // obj.inputErrorClass
   errorClass: 'popup__error_visible' //obj.errorClass
 });
+
+export { inactiveButton };

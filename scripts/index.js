@@ -1,4 +1,5 @@
 import { initialCards } from "./constants.js";
+import { inactiveButton }  from "./validate.js";
 
 // элементы секции profile:
 const profileName = document.querySelector('.profile__intro-name');
@@ -23,11 +24,11 @@ const closeShowPictureBtn = showPicturePopup.querySelector('.popup__close-btn');
 // другие элементы:
 const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
+const popupList = Array.from(document.querySelectorAll('.popup'));
 
 const closeClickToOverlay = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
   const isCloseBtn = evt.target.classList.contains('popup__close-btn');
-  const popupList = Array.from(document.querySelectorAll('.popup'));
 
   if (isOverlay || isCloseBtn) {
     popupList.forEach((popupElement) => {
@@ -47,12 +48,14 @@ const closePopup = (popupElement) => {
 const openEditForm = () => {
   editProfileNameInput.value =  profileName.textContent;
   editProfileJobInput.value = profileJob.textContent;
+  inactiveButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(editProfilePopup);
 }
 
 const openAddForm = () => {
   addFormCaptionInput.value = '';
   addFormLinkInput.value = '';
+  inactiveButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
   openPopup(addFormPopup);
 }
 
