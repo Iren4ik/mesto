@@ -26,12 +26,12 @@ const cardsContainer = document.querySelector('.elements__items');
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
 const config = {
-  formSelector: '.popup__input-container', //obj.formSelector
-  inputSelector: '.popup__input', //obj.inputSelector
-  submitButtonSelector: '.popup__save-btn', // obj.submitButtonSelector
-  inactiveButtonClass: 'popup__save-btn_disabled', //obj.inactiveButtonClass
-  inputErrorClass: 'popup__input_valid_error', // obj.inputErrorClass
-  errorClass: 'popup__error_visible' //obj.errorClass
+  formSelector: '.popup__input-container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__input_valid_error',
+  errorClass: 'popup__error_visible',
 };
 
 //создание новой карточки
@@ -113,7 +113,7 @@ const handleAddFormSubmit = (evt) => {
   closePopup(addFormPopup);
 }
 
-//Добавление на страицу первых 6 карточек
+//Добавление на страницу первых 6 карточек
 initialCards.forEach((element) => {   
   cardsContainer.append(createNewCard(element));
 });
