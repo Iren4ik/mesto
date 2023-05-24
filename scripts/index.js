@@ -1,6 +1,7 @@
 import { initialCards } from "./constants.js";
 import { activateButton }  from "./validate.js";
 import { deactivateButton }  from "./validate.js";
+import { Card } from "./Card.js";
 
 // элементы секции profile:
 const profileName = document.querySelector('.profile__intro-name');
@@ -22,10 +23,55 @@ const openAddCardsBtn = document.querySelector('.profile__add-btn');
 // элементы showPicturePopup:
 const showPicturePopup = document.querySelector('.popup_feat_show-image');
 // другие элементы:
-const cardsTemplate = document.getElementById('elements-template');
+// const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
+const createNewCard = (element) => {
+  const card = new Card (element, openPhoto);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+//Открытие фото
+const openPhoto = (cardData) => {
+  photoElement.src = cardData.link;
+  photoElement.alt = cardData.name;
+
+  console.log(photoElement);
+  console.log(photoElement.src);
+  console.log(cardData.link);
+
+  photoTitle.textContent = cardData.name;
+  openPopup(showPicturePopup);
+}
+
+const openPopup = (popupElement) => {
+  popupElement.classList.add('popup_opened');
+  document.addEventListener('click', handlePopupClose);
+  document.addEventListener('keydown', closePressTheEsc);
+}
+
+
+
+const openEditForm = () => {
+  editProfileNameInput.value =  profileName.textContent;
+  editProfileJobInput.value = profileJob.textContent;
+  activateButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  openPopup(editProfilePopup);
+}
+
+const openAddForm = () => {
+  addCardsForm.reset();
+  deactivateButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  openPopup(addFormPopup);
+}
+
+const closePopup = (popupElement) => {
+  popupElement.classList.remove('popup_opened');
+  document.removeEventListener('click', handlePopupClose);
+  document.removeEventListener('keydown', closePressTheEsc);
+}
 
 const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
@@ -42,87 +88,28 @@ const closePressTheEsc = (evt) => {
   }
 }
 
-const openPopup = (popupElement) => {
-  popupElement.classList.add('popup_opened');
-  document.addEventListener('click', handlePopupClose);
-  document.addEventListener('keydown', closePressTheEsc);
-}
-
-const closePopup = (popupElement) => {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('click', handlePopupClose);
-  document.removeEventListener('keydown', closePressTheEsc);
-}
-
-const openEditForm = () => {
-  editProfileNameInput.value =  profileName.textContent;
-  editProfileJobInput.value = profileJob.textContent;
-  activateButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
-  openPopup(editProfilePopup);
-}
-
-const openAddForm = () => {
-  addCardsForm.reset();
-  deactivateButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
-  openPopup(addFormPopup);
-}
-
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault(); 
   profileName.textContent = editProfileNameInput.value;
   profileJob.textContent = editProfileJobInput.value;
   closePopup(editProfilePopup);
-} 
+}
 
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault(); 
-  const elementAdd = {
+  const cardAdd = {
     name: addFormCaptionInput.value,
     link: addFormLinkInput.value
   };
-  const element = createCardElement(elementAdd);
-  cardsContainer.prepend(element);
+  cardsContainer.prepend(createNewCard(cardAdd));
   closePopup(addFormPopup);
 }
 
-const createCardElement = (cardData) => {
-  const cardElement = cardsTemplate.content.querySelector('.elements__element').cloneNode(true);   //ищем и клонируем контент шаблона
-  const cardImage = cardElement.querySelector('.elements__photo');
-  const cardTitle = cardElement.querySelector('.elements__place');
-  const cardDeleteBtn = cardElement.querySelector('.elements__trash');
-  const cardLikeBtn = cardElement.querySelector('.elements__like');
-  cardTitle.textContent = cardData.name;
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-
-  const handleDelete = () => {
-    cardElement.remove();
-  };
-
-  const handleLike = () => {
-    cardLikeBtn.classList.toggle('elements__like_active');
-  };
-
-  const openPhoto = () => {
-    photoElement.src = cardData.link;
-    photoElement.alt = cardData.name;
-    photoTitle.textContent = cardData.name;
-    openPopup(showPicturePopup);
-  }
-  
-  cardImage.addEventListener('click', openPhoto);
-  cardDeleteBtn.addEventListener('click', handleDelete);
-  cardLikeBtn.addEventListener('click', handleLike);
-  return cardElement;
-};
-
-initialCards.forEach((card) => {   //Смотрим каждый элемнт массива и выводим на страницу
-  const element = createCardElement(card);
-  cardsContainer.append(element);
+initialCards.forEach((element) => {   
+  cardsContainer.append(createNewCard(element));
 });
 
 openEditProfileBtn.addEventListener('click', openEditForm);
 openAddCardsBtn.addEventListener('click', openAddForm);
 editProfileForm.addEventListener('submit', handleProfileFormSubmit); 
 addCardsForm.addEventListener('submit', handleAddFormSubmit);
-
