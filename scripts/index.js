@@ -1,7 +1,6 @@
 import { initialCards } from "./constants.js";
-import { activateButton }  from "./validate.js";
-import { deactivateButton }  from "./validate.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
 // элементы секции profile:
 const profileName = document.querySelector('.profile__intro-name');
@@ -23,10 +22,19 @@ const openAddCardsBtn = document.querySelector('.profile__add-btn');
 // элементы showPicturePopup:
 const showPicturePopup = document.querySelector('.popup_feat_show-image');
 // другие элементы:
-// const cardsTemplate = document.getElementById('elements-template');
 const cardsContainer = document.querySelector('.elements__items');
 const popupList = Array.from(document.querySelectorAll('.popup'));
 
+const config = {
+  formSelector: '.popup__input-container', //obj.formSelector
+  inputSelector: '.popup__input', //obj.inputSelector
+  submitButtonSelector: '.popup__save-btn', // obj.submitButtonSelector
+  inactiveButtonClass: 'popup__save-btn_disabled', //obj.inactiveButtonClass
+  inputErrorClass: 'popup__input_valid_error', // obj.inputErrorClass
+  errorClass: 'popup__error_visible' //obj.errorClass
+};
+
+//создание новой карточки
 const createNewCard = (element) => {
   const card = new Card (element, openPhoto);
   const cardElement = card.createCard();
@@ -37,57 +45,56 @@ const createNewCard = (element) => {
 const openPhoto = (cardData) => {
   photoElement.src = cardData.link;
   photoElement.alt = cardData.name;
-
-  console.log(photoElement);
-  console.log(photoElement.src);
-  console.log(cardData.link);
-
   photoTitle.textContent = cardData.name;
   openPopup(showPicturePopup);
 }
 
+//Открытие попапов
 const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
   document.addEventListener('click', handlePopupClose);
   document.addEventListener('keydown', closePressTheEsc);
 }
 
-
-
+//Открытие формы редактирования
 const openEditForm = () => {
   editProfileNameInput.value =  profileName.textContent;
   editProfileJobInput.value = profileJob.textContent;
-  activateButton(editProfilePopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  formProfileValidator.activateButton();
   openPopup(editProfilePopup);
 }
 
+//Открытие формы добавления карточки
 const openAddForm = () => {
   addCardsForm.reset();
-  deactivateButton(addFormPopup.querySelector('.popup__save-btn'), {inactiveButtonClass: 'popup__save-btn_disabled'});
+  formAddValidator.deactivateButton();
   openPopup(addFormPopup);
 }
 
+//Закрытие попапов
 const closePopup = (popupElement) => {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('click', handlePopupClose);
   document.removeEventListener('keydown', closePressTheEsc);
 }
 
+//Закрытие попапов через оверлей и крестик
 const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
   const isCloseBtn = evt.target.classList.contains('popup__close-btn');
-
   if (isOverlay || isCloseBtn) {
     popupList.forEach(closePopup);
   }
 }; 
 
+//Закрытие попапов через esc
 const closePressTheEsc = (evt) => {
   if (evt.key === 'Escape') {
     popupList.forEach(closePopup);
   }
 }
 
+//Отправка формы редактирования профиля
 const handleProfileFormSubmit = (evt) => {
   evt.preventDefault(); 
   profileName.textContent = editProfileNameInput.value;
@@ -95,6 +102,7 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(editProfilePopup);
 }
 
+//Отправка формы добавления карточки
 const handleAddFormSubmit = (evt) => {
   evt.preventDefault(); 
   const cardAdd = {
@@ -105,9 +113,17 @@ const handleAddFormSubmit = (evt) => {
   closePopup(addFormPopup);
 }
 
+//Добавление на страицу первых 6 карточек
 initialCards.forEach((element) => {   
   cardsContainer.append(createNewCard(element));
 });
+
+//Создание экземпляров для валидации
+const formProfileValidator = new FormValidator(config, editProfileForm);
+formProfileValidator.enableValidation();
+
+const formAddValidator = new FormValidator(config, addCardsForm);
+formAddValidator.enableValidation();
 
 openEditProfileBtn.addEventListener('click', openEditForm);
 openAddCardsBtn.addEventListener('click', openAddForm);
