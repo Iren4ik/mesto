@@ -23,7 +23,6 @@ const btnOpenPopupCard = document.querySelector('.profile__add-btn');
 const popupShowPicture = document.querySelector('.popup_feat_show-image');
 // другие элементы:
 const cardsContainer = document.querySelector('.elements__items');
-const popupOpened = document.querySelector('.popup_opened');
 
 const config = {
   formSelector: '.popup__input-container',
@@ -83,14 +82,14 @@ const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
   const isCloseBtn = evt.target.classList.contains('popup__close-btn');
   if (isOverlay || isCloseBtn) {
-    closePopup(popupOpened);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }; 
 
 //Закрытие попапов через esc
 const closePressTheEsc = (evt) => {
   if (evt.key === 'Escape') {
-    closePopup(popupOpened);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
