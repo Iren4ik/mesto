@@ -23,6 +23,7 @@ const btnOpenPopupCard = document.querySelector('.profile__add-btn');
 const popupShowPicture = document.querySelector('.popup_feat_show-image');
 // другие элементы:
 const cardsContainer = document.querySelector('.elements__items');
+const popupOpened = document.querySelector('.popup_opened');
 
 const config = {
   formSelector: '.popup__input-container',
@@ -31,7 +32,7 @@ const config = {
   inactiveButtonClass: 'popup__save-btn_disabled',
   inputErrorClass: 'popup__input_valid_error',
   errorClass: 'popup__error_visible',
-};
+}
 
 //создание новой карточки
 const createNewCard = (element) => {
@@ -54,7 +55,6 @@ const openPopup = (popupElement) => {
   document.addEventListener('click', handlePopupClose);
   document.addEventListener('keydown', closePressTheEsc);
 }
-
 
 //Открытие формы редактирования
 const openEditForm = () => {
@@ -83,14 +83,14 @@ const handlePopupClose = (evt) => {
   const isOverlay = evt.target.classList.contains('popup'); 
   const isCloseBtn = evt.target.classList.contains('popup__close-btn');
   if (isOverlay || isCloseBtn) {
-    closePopup(document.querySelector('.popup_opened'));
+    closePopup(popupOpened);
   }
 }; 
 
 //Закрытие попапов через esc
 const closePressTheEsc = (evt) => {
   if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
+    closePopup(popupOpened);
   }
 }
 
