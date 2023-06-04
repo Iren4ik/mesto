@@ -1,9 +1,9 @@
-class Card {
-  constructor(cardData, openPhoto) {
+export default class Card {
+  constructor(cardData, handleCardClick) {
     this._cardData = cardData;
     this._link = cardData.link;
-    this._name = cardData.name;
-    this._openPhoto = openPhoto;
+    this._name = cardData.title;
+    this._handleCardClick = handleCardClick;
 
     this._templateElement = 
       document
@@ -22,7 +22,7 @@ class Card {
   }
   
   _openPicture = () => {
-    this._openPhoto(this._cardData);
+    this._handleCardClick(this._cardData);
   }
 
   _setEventListener = () => {
@@ -38,11 +38,9 @@ class Card {
     this._cardLikeBtn = this._templateElement.querySelector('.elements__like');
     
     this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
+    this._cardImage.alt = `На фотографии ${this._name}`;
     this._cardTitle.textContent = this._name;
     this._setEventListener();
     return this._templateElement;
   }
 }
-
-export { Card };

@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(config, form) {
     this._form = form;
     this._formSelector = config.formSelector; //'.popup__input-container'
@@ -88,5 +88,3 @@ class FormValidator {
     });
   } 
 }
-
-export { FormValidator };
