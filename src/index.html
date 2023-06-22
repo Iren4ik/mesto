@@ -4,17 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
+  <!-- ЗАККОМЕНТИТЬ -->
+  <!-- <link rel="stylesheet" href="./pages/index.css">   -->
 </head>
 <body class="page">
   <header class="header">
     <img src="<%=require('./images/logo.svg')%>" class="logo" alt="Логотип">
+    <!-- <img src="./images/logo.svg" class="logo" alt="Логотип"> -->
   </header>
 
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар">
+
+        <button class="profile__avatar-btn">
+          <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар"> 
+          <!-- <img class="profile__avatar" src="./images/profile__avatar.jpg" alt="Аватар"> -->
+        </button>
         <div class="profile__intro">
           <div class="profile__intro-name-container">
             <h1 class="profile__intro-name">Жак-Ив Кусто</h1>
@@ -37,84 +43,116 @@
     <p class="footer__text">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup popup_overlay_light popup_feat_edit-form">
-    <div class="popup__container popup__container_type_form">
-      <button class="popup__close-btn opacity" type="button"></button>
-      <h2 class="popup__header">Редактировать профиль</h2>
-      <!--ФОРМА РЕДАКТИРОВАНИЯ-->
-      <form class="popup__input-container popup__input-container_type_edit" 
-            name="edit-form" novalidate>
-        <label class="popup__input-element">
-          <input class="popup__input popup__input_type_name" 
-                id="name" 
-                type="text" name="title" placeholder="Имя" 
-                minlength="2" maxlength="40" required> <!--popup__input_valid_error-->
-          <span class="name-error popup__error"></span> <!--popup__error_visible-->
-        </label>
-
-        <label class="popup__input-element">
-          <input class="popup__input popup__input_type_job" 
-                id="job" 
-                type="text" name="job" placeholder="О себе" 
-                minlength="2" maxlength="200" required> <!--popup__input_valid_error-->
-          <span class="job-error popup__error"></span> <!--popup__error_visible-->
-        </label>
-        <input class="popup__save-btn"  
-                type="submit" 
-                value="Сохранить"> <!--popup__save-btn_disabled-->
-      </form>
-    </div>
-  </div>
-
-  <div class="popup popup_overlay_light popup_feat_add-cards">
-    <div class="popup__container popup__container_type_form">
-      <button class="popup__close-btn opacity" type="button"></button>
-      <h2 class="popup__header">Новое место</h2>
-      <!--ФОРМА ДОБАВЛЕНИЯ-->
-      <form class="popup__input-container popup__input-container_type_add" 
-            name="add-form" novalidate>
-        <label class="popup__input-element">
-          <input class="popup__input popup__input_type_caption" 
-                id="caption" 
-                type="text" name="title" placeholder="Название" 
-                minlength="2" maxlength="30" required> <!--popup__input_valid_error-->
-          <span class="caption-error popup__error"></span> <!--popup__error_visible-->
-        </label>
-
-        <label class="popup__input-element">
-          <input class="popup__input popup__input_type_link" 
-                id="link" type="url" name="link" placeholder="Ссылка на картинку" 
-                required> <!--popup__input_valid_error-->
-          <span class="link-error popup__error"></span> <!--popup__error_visible-->
-        </label>
-        <input class="popup__save-btn popup__save-btn_add" 
-                type="submit" 
-                value="Создать"> <!--popup__save-btn_disabled-->
-      </form>
-    </div>
-  </div>
-
-  <div class="popup popup_overlay_dark popup_feat_show-image">
-    <div class="popup__container">
-      <figure class="popup__figure">
+    <!--ФОРМА РЕДАКТИРОВАНИЯ ПРОФИЛЯ-->
+    <div class="popup popup_overlay_light popup_feat_edit-form">
+      <div class="popup__container popup__container_type_form">
         <button class="popup__close-btn opacity" type="button"></button>
-        <img class="popup__photo" src="#" alt="Фото">
-        <figcaption class="popup__caption"></figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <template id="elements-template">
-    <li class="elements__element">
-      <button class="elements__trash opacity" type="button"></button> 
-      <img class="elements__photo opacity" src="#" alt="Фото">
-      <div class="elements__caption">
-        <h2 class="elements__place"></h2>
-        <button class="elements__like" type="button"></button>
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <form class="popup__input-container popup__input-container_type_edit" name="edit-form" novalidate>
+          <label class="popup__input-element">
+            <input class="popup__input popup__input_type_name" id="name" type="text" name="title" placeholder="Имя"
+              minlength="2" maxlength="40" required>
+            <!--popup__input_valid_error-->
+            <span class="name-error popup__error"></span>
+            <!--popup__error_visible-->
+          </label>
+          <label class="popup__input-element">
+            <input class="popup__input popup__input_type_job" id="job" type="text" name="job" placeholder="О себе"
+              minlength="2" maxlength="200" required>
+            <!--popup__input_valid_error-->
+            <span class="job-error popup__error"></span>
+            <!--popup__error_visible-->
+          </label>
+          <input class="popup__save-btn" type="submit" value="Сохранить">
+          <!--popup__save-btn_disabled-->
+        </form>
       </div>
-    </li>
-  </template>
+    </div>
+  
+    <!--ФОРМА ДОБАВЛЕНИЯ КАРТОЧЕК-->
+    <div class="popup popup_overlay_light popup_feat_add-cards">
+      <div class="popup__container popup__container_type_form">
+        <button class="popup__close-btn opacity" type="button"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__input-container popup__input-container_type_add" name="add-form" novalidate>
+          <label class="popup__input-element">
+            <input class="popup__input popup__input_type_caption" id="caption" type="text" name="title"
+              placeholder="Название" minlength="2" maxlength="30" required>
+            <!--popup__input_valid_error-->
+            <span class="caption-error popup__error"></span>
+            <!--popup__error_visible-->
+          </label>
+          <label class="popup__input-element">
+            <input class="popup__input popup__input_type_link" id="link" type="url" name="link"
+              placeholder="Ссылка на картинку" required>
+            <!--popup__input_valid_error-->
+            <span class="link-error popup__error"></span>
+            <!--popup__error_visible-->
+          </label>
+          <input class="popup__save-btn popup__save-btn_add" type="submit" value="Создать">
+          <!--popup__save-btn_disabled-->
+        </form>
+      </div>
+    </div>
+  
+    <!--РЕДАКТИРОВАНИЕ АВАТАРКИ-->
+    <div class="popup popup_overlay_light popup_feat_edit-avatar">
+      <div class="popup__container popup__container_type_avatar">
+        <button class="popup__close-btn opacity" type="button"></button>
+        <h2 class="popup__header">Обновить аватар</h2>
+        <form class="popup__input-container popup__input-container_type_avatar" name="edit-avatar" novalidate>
+          <label class="popup__input-element">
+            <input class="popup__input popup__input_type_avatar" id="avatar" type="url" name="avatar"
+              placeholder="Ссылка на картинку" required>
+            <!--popup__input_valid_error-->
+            <span class="avatar-error popup__error"></span>
+            <!--popup__error_visible-->
+          </label>
+          <input class="popup__save-btn popup__save-btn_avatar" type="submit" value="Сохранить">
+          <!--popup__save-btn_disabled-->
+        </form>
+      </div>
+    </div>
+  
+    <!--ФОТО НА ВЕСЬ ЭКРАН-->
+    <div class="popup popup_overlay_dark popup_feat_show-image">
+      <div class="popup__container">
+        <figure class="popup__figure">
+          <button class="popup__close-btn opacity" type="button"></button>
+          <img class="popup__photo" src="#" alt="Фото">
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+      </div>
+    </div>
+  
+    <!-- УДАЛЕНИЕ КАРТОЧКИ -->
+    <div class="popup popup_overlay_light popup_feat_delete">
+      <div class="popup__container popup__container_type_delete">
+        <button class="popup__close-btn opacity" type="button"></button>
+        <h2 class="popup__header popup__header_delete-popup">Вы уверенны?</h2>
+        <form class="popup__input-container popup__input-container_type_delete" name="delete-card" novalidate>
+          <button class="popup__save-btn popup__save-btn_delete" type="submit" value="Создать">
+            Да
+          </button>
+        </form>
+      </div>
+    </div>
 
+    <template id="elements-template">
+      <li class="elements__element">
+        <button class="elements__trash opacity" type="button"></button>
+        <img class="elements__photo opacity" src="#" alt="Фото">
+        <div class="elements__caption">
+          <h2 class="elements__place"></h2>
+          <div class="elements__like-container">
+            <button class="elements__like" type="button"></button>
+            <p class="elements__like-counter">0</p>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <!-- ЗАККОМЕНТИТЬ -->
   <!-- <script src="./pages/index.js" type="module"></script> -->
 
 </body>
