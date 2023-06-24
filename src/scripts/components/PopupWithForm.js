@@ -8,12 +8,12 @@ export default class PopupWithForm extends Popup {
     this._inputList = this._form.querySelectorAll('.popup__input');
   }
 
-  //собирает введенные в попап данные для послед. размещения в профиле
-  getInputValue() {
+  //собираем данные с инпутов в объект
+  _getInputValue() { 
     this._value = {};
     this._inputList.forEach(input => {
       this._value[input.name] = input.value;
-    });
+    });  
     return this._value;
   }
 
@@ -24,9 +24,12 @@ export default class PopupWithForm extends Popup {
     })
   }
   
-  setEventListeners () {
+  setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', this._submitFormFunction);
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitFormFunction(this._getInputValue());
+    });
   }
 
   close() {

@@ -70,8 +70,8 @@ export default class FormValidator {
   enableValidation = () => {
     this._formList = Array.from(document.querySelectorAll(this._formSelector));
     this._formList.forEach((form) => {
-      form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
+      form.addEventListener('reset', () => {
+        this._deactivateButton();
       });
       this._setEventListeners();
     });

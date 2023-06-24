@@ -3,18 +3,18 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
     this._initialCards = items;
     //функция, которая отвечает за создание и отрисовку данных на странице
-    this.renderer = renderer; //публичное, чтобы использовать в колбэке формы для сабмита
+    this._renderer = renderer;
   }
 
   //отвечает за отрисовку всех элементов. Отрисовка каждого отдельного элемента должна осуществляться функцией renderer
   addCardsFromOriginalArray() {
     this._initialCards.forEach(element => {   
-      this._addItem(this.renderer(element));
+      this._renderer(element);
     })
   }
 
   // принимает DOM-элемент и добавляет его в контейнер.
-  _addItem(domElement) {
+  addItem(domElement) {
     this._container.append(domElement);
   }
 

@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(cardData, handleCardClick) {
+  constructor(cardData, openPopupWithImage, openDeletePopup) {
     this._cardData = cardData;
     this._link = cardData.link;
     this._name = cardData.title;
-    this._handleCardClick = handleCardClick;
+    this._openPopupWithImage = openPopupWithImage;
+    this._openDeletePopup = openDeletePopup;
 
     this._templateElement = 
       document
@@ -17,18 +18,23 @@ export default class Card {
     this._cardLikeBtn.classList.toggle('elements__like_active');
   }
 
-  _handleDelete = () => {
-    this._templateElement.remove();
+  _openDelete = () => {
+    this._openDeletePopup(this); //передаем экземпляр
   }
   
   _openPicture = () => {
-    this._handleCardClick(this._cardData);
+    this._openPopupWithImage(this._cardData);
   }
 
   _setEventListener = () => {
     this._cardLikeBtn.addEventListener('click', this._handleLike);
-    this._cardDeleteBtn.addEventListener('click', this._handleDelete);
+    this._cardDeleteBtn.addEventListener('click', this._openDelete);
     this._cardImage.addEventListener('click', this._openPicture);
+  }
+
+  removeCard() {
+    this._templateElement.remove();
+    this._templateElemen = null;
   }
 
   createCard = () => {

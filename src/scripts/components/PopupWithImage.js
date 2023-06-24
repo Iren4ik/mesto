@@ -9,6 +9,7 @@ export default class PopupWithImage extends Popup {
 
 // Этот класс должен перезаписывать родительский метод open. 
 // В методе open класса PopupWithImage нужно вставлять в попап картинку с src изображения и подписью к картинке.
+  
   open = (cardData) => {
     this._photo.src = cardData.link;
     this._photo.alt = `На фотографии ${cardData.title}`;

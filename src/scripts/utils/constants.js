@@ -25,10 +25,13 @@ const initialCards = [
   }
 ]; 
 
-const btnOpenPopupProfile = document.querySelector('.profile__intro-edit-btn');
 const formEditProfile = document.forms['edit-form'];
 const formAddCard = document.forms['add-form'];
+const formEditAvatar = document.forms['edit-avatar']; // изменения
+const btnOpenPopupProfile = document.querySelector('.profile__intro-edit-btn');
 const btnOpenPopupCard = document.querySelector('.profile__add-btn');
+const btnOpenEditAvatar = document.querySelector('.profile__avatar-btn');
+const profileAvatar = document.querySelector('.profile__avatar');
 
 const configValidation = {
   formSelector: '.popup__input-container',
@@ -46,10 +49,13 @@ const configProfileInfo = {
 
 export {
   initialCards,
-  btnOpenPopupProfile,
   formEditProfile,
   formAddCard,
+  formEditAvatar,
+  btnOpenPopupProfile,
   btnOpenPopupCard,
+  btnOpenEditAvatar,
+  profileAvatar,
   configValidation,
   configProfileInfo,
 };
