@@ -5,21 +5,30 @@ export default class PopupDeleteCard extends Popup {
     super(popupSelector);
     this._submitFormFunction = submitFormFunction;
     this._form = this._popup.querySelector('.popup__input-container');
+    this._submitBtn = this._form.querySelector('.popup__save-btn');
+    this._defaultSubmitText = this._submitBtn.textContent;
   }
 
-  setEventListeners() {
+  renderLoading(isLoading){
+    if (isLoading) {
+      this._submitBtn.textContent = 'Удаление...';
+    } else {
+      this._submitBtn.textContent = this._defaultSubmitText;
+    }
+  }
+  
+  setEventListeners () {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitFormFunction(this._element);
+      this._submitFormFunction({ card: this._card, cardId: this._cardId });
     });
   }
 
-  open = (element) => {
+  open = ({ card, cardId }) => {
     super.open();
-    //при октрытии создаст в экземпляре свойство элемент с этим полученным аргументом
-    //надо понимать на какую карточку кликнули
-    this._element = element;
+    this._card = card;
+    this._cardId = cardId;
   }
 
   close() {

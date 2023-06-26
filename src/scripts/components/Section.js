@@ -1,14 +1,14 @@
 export default class Section {
-  constructor({ items, renderer }, containerSelector) {
+  constructor(renderer, containerSelector) {
     this._container = document.querySelector(containerSelector);
-    this._initialCards = items;
+    // this._initialCards = items;
     //функция, которая отвечает за создание и отрисовку данных на странице
     this._renderer = renderer;
   }
 
   //отвечает за отрисовку всех элементов. Отрисовка каждого отдельного элемента должна осуществляться функцией renderer
-  addCardsFromOriginalArray() {
-    this._initialCards.forEach(element => {   
+  renderCards(arrCards) {
+    arrCards.forEach(element => {   
       this._renderer(element);
     })
   }
